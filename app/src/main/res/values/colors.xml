@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+
+    <color name="title">#207EDA</color>
+    <color name="textcolor">#E0FFFF</color>
+    <color name="red">#FF0000</color>
+    <color name="green">#22B286</color>
+    <color name="blue">#148BFF</color>
+    <color name="black">#000000</color>
+    <color name="white">#F0F0F0</color>
+    <color name="pay">#01AAEE</color>
+    <color name="maptop">#394048</color>
+    <color name="unchecked">#1B1B1B</color>
+    <color name="checked">#131313</color>
+</resources>

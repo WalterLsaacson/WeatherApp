@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_cloudy_day"
+    android:fitsSystemWindows="true"
+    tools:context="com.guanyin.sardar.weatherapp.WeatherActivity">
+
+    <FrameLayout
+        android:id="@+id/content_frame"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+    <RadioGroup
+        android:id="@+id/bottom_menu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/weather"
+            style="@style/itemTheme"
+            android:drawableTop="@drawable/selector_weather"
+            android:text="@string/weather"/>
+
+        <RadioButton
+            android:id="@+id/live"
+            style="@style/itemTheme"
+            android:drawableTop="@drawable/selector_live"
+            android:text="@string/live"/>
+
+        <RadioButton
+            android:id="@+id/around"
+            style="@style/itemTheme"
+            android:drawableTop="@drawable/selector_around"
+            android:text="@string/around"/>
+
+        <RadioButton
+            android:id="@+id/me"
+            style="@style/itemTheme"
+            android:drawableTop="@drawable/selector_me"
+            android:text="@string/me"/>
+    </RadioGroup>
+
+</RelativeLayout>
