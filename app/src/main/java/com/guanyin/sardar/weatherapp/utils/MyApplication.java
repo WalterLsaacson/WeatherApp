@@ -1,6 +1,7 @@
 package com.guanyin.sardar.weatherapp.utils;
 
 import android.app.Application;
+import android.provider.Settings;
 import android.util.Log;
 
 import com.baidu.location.BDLocation;
@@ -12,6 +13,8 @@ import com.baidu.location.LocationClientOption;
 public class MyApplication extends Application {
 
     private static MyApplication instance;
+
+    public static long updateTime = System.currentTimeMillis();
 
     // 最近一次定位的经纬度
     public double latitude = 0;
@@ -94,7 +97,7 @@ public class MyApplication extends Application {
 
             sb.append("\naddress : ");
             sb.append(location.getAddrStr());
-            address = location.getAddrStr();
+            address = location.getAddrStr().replace("中国", "");
 
             if (location.getLocType() == BDLocation.TypeNetWorkLocation) {// 网络定位结果
                 sb.append("\naddr : ");

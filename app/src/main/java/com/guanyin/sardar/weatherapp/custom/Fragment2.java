@@ -1,9 +1,15 @@
 package com.guanyin.sardar.weatherapp.custom;
 
 import android.app.Fragment;
+import android.os.Bundle;
 import android.os.Message;
+import android.support.annotation.Nullable;
 import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
+import com.guanyin.sardar.weatherapp.R;
 import com.guanyin.sardar.weatherapp.utils.Const;
 import com.guanyin.sardar.weatherapp.utils.MyApplication;
 
@@ -17,6 +23,11 @@ import javax.net.ssl.HttpsURLConnection;
 public class Fragment2 extends Fragment {
 
     private String TAG = "Fragment2";
-    private MyApplication application = (MyApplication) getActivity().getApplication();
 
+    @Nullable
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle
+            savedInstanceState) {
+        return inflater.inflate(R.layout.live_fragment,container,false);
+    }
 }

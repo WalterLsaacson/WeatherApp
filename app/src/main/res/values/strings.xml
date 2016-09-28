@@ -5,4 +5,7 @@
     <string name="live">实景</string>
     <string name="around">周边</string>
     <string name="me">我</string>
+    <string name="defultcity">北京</string>
+    <string name="tsing">清华大学</string>
+    <string name="twohour">2小时前发布</string>
 </resources>

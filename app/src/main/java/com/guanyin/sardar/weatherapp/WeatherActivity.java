@@ -20,7 +20,6 @@ import com.guanyin.sardar.weatherapp.utils.MyApplication;
 
 public class WeatherActivity extends Activity implements CompoundButton.OnCheckedChangeListener {
 
-    private MyApplication application;
     // override key down event to implement double click to exit app
     private long exitTime = 0;
     private String TAG = "WeatherActivity";
@@ -44,9 +43,6 @@ public class WeatherActivity extends Activity implements CompoundButton.OnChecke
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_weather);
-        if (application == null) {
-            application = MyApplication.getInstance();
-        }
         setContentFrame();
         setRadioGroup();
     }
@@ -69,25 +65,25 @@ public class WeatherActivity extends Activity implements CompoundButton.OnChecke
 
         drawable = getResources().getDrawable(R.drawable.selector_weather);
         if (drawable != null) {
-            drawable.setBounds(0, 3, 60, 60);
+            drawable.setBounds(0, 3, 50, 50);
         }
         weather.setCompoundDrawables(null, drawable, null, null);
 
         drawable = getResources().getDrawable(R.drawable.selector_live);
         if (drawable != null) {
-            drawable.setBounds(0, 3, 60, 60);
+            drawable.setBounds(0, 3, 50, 50);
         }
         live.setCompoundDrawables(null, drawable, null, null);
 
         drawable = getResources().getDrawable(R.drawable.selector_around);
         if (drawable != null) {
-            drawable.setBounds(0, 3, 60, 60);
+            drawable.setBounds(0, 3, 50, 50);
         }
         around.setCompoundDrawables(null, drawable, null, null);
 
         drawable = getResources().getDrawable(R.drawable.selector_me);
         if (drawable != null) {
-            drawable.setBounds(0, 3, 60, 60);
+            drawable.setBounds(0, 3, 50, 50);
         }
         me.setCompoundDrawables(null, drawable, null, null);
 
@@ -124,33 +120,38 @@ public class WeatherActivity extends Activity implements CompoundButton.OnChecke
 
         FragmentManager fm = getFragmentManager();
         FragmentTransaction transaction = fm.beginTransaction();
-
-        switch (buttonView.getId()) {
-            case R.id.weather:
-                if (null == weatherFragment) {
-                    weatherFragment = new Fragment1();
-                    transaction.replace(R.id.content_frame, weatherFragment);
-                }
-                break;
-            case R.id.live:
-                if (null == liveFragment) {
-                    liveFragment = new Fragment2();
-                    transaction.replace(R.id.content_frame, liveFragment);
-                }
-                break;
-            case R.id.around:
-                if (null == aroundFragment) {
-                    aroundFragment = new Fragment3();
-                    transaction.replace(R.id.content_frame, aroundFragment);
-                }
-                break;
-            case R.id.me:
-                if (null == meFragment) {
-                    meFragment = new Fragment4();
-                    transaction.replace(R.id.content_frame, meFragment);
-                }
-                break;
+        if (isChecked) {
+            switch (buttonView.getId()) {
+                case R.id.weather:
+                    if (null == weatherFragment) {
+                        weatherFragment = new Fragment1();
+                        transaction.replace(R.id.content_frame, weatherFragment);
+                    } else
+                        transaction.replace(R.id.content_frame, weatherFragment);
+                    break;
+                case R.id.live:
+                    if (null == liveFragment) {
+                        liveFragment = new Fragment2();
+                        transaction.replace(R.id.content_frame, liveFragment);
+                    } else
+                        transaction.replace(R.id.content_frame, liveFragment);
+                    break;
+                case R.id.around:
+                    if (null == aroundFragment) {
+                        aroundFragment = new Fragment3();
+                        transaction.replace(R.id.content_frame, aroundFragment);
+                    } else
+                        transaction.replace(R.id.content_frame, aroundFragment);
+                    break;
+                case R.id.me:
+                    if (null == meFragment) {
+                        meFragment = new Fragment4();
+                        transaction.replace(R.id.content_frame, meFragment);
+                    } else
+                        transaction.replace(R.id.content_frame, meFragment);
+                    break;
+            }
+            transaction.commit();
         }
-        transaction.commit();
     }
 }
