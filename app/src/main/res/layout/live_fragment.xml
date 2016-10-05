@@ -1,14 +1,72 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:background="@drawable/bg_haze"
-              android:gravity="center"
-              android:orientation="vertical">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/bg_haze"
+                android:orientation="vertical">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <RadioGroup
+        android:id="@+id/news_selector"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="fragment2"/>
+        android:layout_marginTop="5dp"
+        android:background="@android:color/transparent"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal">
 
-</LinearLayout>
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:button="@null"
+            android:checked="true"
+            android:text="@string/realtime"
+            android:textColor="@drawable/selector_text_color"
+            android:textSize="18sp"/>
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:button="@null"
+            android:text="@string/hotpoint"
+            android:textColor="@drawable/selector_text_color"
+            android:textSize="18sp"/>
+    </RadioGroup>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/news_selector"
+        android:layout_marginTop="3dp"
+        android:gravity="center_horizontal">
+
+        <View
+            android:layout_width="50dp"
+            android:layout_height="2dp"
+            android:background="@color/white"/>
+
+        <View
+            android:layout_width="50dp"
+            android:layout_height="2dp"
+            android:layout_marginStart="5dp"
+            android:background="@color/white"/>
+    </LinearLayout>
+
+    <android.support.v4.view.ViewPager
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true">
+
+    </android.support.v4.view.ViewPager>
+
+    <CheckBox
+        android:id="@+id/btn_menu_photo"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="60dp"
+        android:background="@drawable/selector_photo_radiobutton"
+        android:button="@null"/>
+
+</RelativeLayout>

@@ -19,7 +19,9 @@ public class Const {
 
 
     public static void log(String TAG, String message) {
-        Log.e(TAG, message);
+        if (debug) {
+            Log.e(TAG, message);
+        }
     }
 
     public static int decimalToBinary(String decimalString) {

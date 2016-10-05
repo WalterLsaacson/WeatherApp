@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="match_parent"
-              android:layout_height="match_parent"
+              android:layout_height="wrap_content"
               android:background="@drawable/bg_haze"
               android:orientation="vertical">
 
@@ -37,14 +37,14 @@
                     android:layout_marginTop="5dp"
                     android:text="@string/defultcity"
                     android:textColor="@color/white"
-                    android:textSize="18sp"
+                    android:textSize="16sp"
                     android:textStyle="bold"/>
 
                 <ImageView
                     android:layout_width="12dp"
                     android:layout_height="12dp"
                     android:layout_marginStart="5dp"
-                    android:layout_marginTop="13dp"
+                    android:layout_marginTop="12dp"
                     android:contentDescription="@string/app_name"
                     android:src="@drawable/ic_main_location"/>
 
@@ -70,11 +70,45 @@
         </LinearLayout>
 
         <ImageView
+            android:id="@+id/share_iv"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:contentDescription="@string/app_name"
             android:padding="10dp"
             android:src="@drawable/selector_ic_share"/>
     </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="300dp">
+
+        <TextView
+            android:id="@+id/defaultTemp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:text="@string/_25"
+            android:textColor="@color/white"
+            android:textSize="80sp"/>
+
+        <TextView
+            android:id="@+id/defaultType"
+            android:layout_marginStart="1dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/defult"
+            android:textColor="@color/white"
+            android:textSize="20sp"/>
+    </LinearLayout>
+
+    <ListView
+        android:id="@+id/multiForecast"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:listSelector="@android:color/transparent"
+        android:scrollbars="none">
+
+    </ListView>
 
 </LinearLayout>

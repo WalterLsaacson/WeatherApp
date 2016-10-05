@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@android:color/transparent"
+              android:orientation="vertical">
+
+    <View
+        android:id="@+id/empty"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@android:color/transparent"/>
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_margin="10dp"
+        android:background="@drawable/shape_share">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            android:padding="3dp"
+            android:text="@string/share"
+            android:textColor="@android:color/black"
+            android:textSize="25sp"/>
+
+        <TableRow>
+
+            <ImageView
+                android:id="@+id/share_qq"
+                style="@style/shareTheme"
+                android:contentDescription="@string/app_name"
+                android:src="@drawable/btn_share_qq_normal"/>
+
+            <ImageView
+                android:id="@+id/share_wechat"
+                style="@style/shareTheme"
+                android:contentDescription="@string/app_name"
+                android:src="@drawable/btn_share_weixin_normal"/>
+
+            <ImageView
+                android:id="@+id/share_pyq"
+                style="@style/shareTheme"
+                android:contentDescription="@string/app_name"
+                android:src="@drawable/btn_share_pyq_normal"/>
+        </TableRow>
+
+        <TableRow android:gravity="center_vertical">
+
+            <ImageView
+                android:id="@+id/share_sms"
+                style="@style/shareTheme"
+                android:contentDescription="@string/app_name"
+                android:src="@drawable/btn_share_sms_normal"/>
+
+            <ImageView
+                android:id="@+id/share_weibo"
+                style="@style/shareTheme"
+                android:contentDescription="@string/app_name"
+                android:src="@drawable/btn_share_weibo_normal"/>
+
+            <ImageView
+                android:id="@+id/share_more"
+                style="@style/shareTheme"
+                android:contentDescription="@string/app_name"
+                android:src="@drawable/btn_share_add_normal"/>
+        </TableRow>
+    </TableLayout>
+
+</LinearLayout>

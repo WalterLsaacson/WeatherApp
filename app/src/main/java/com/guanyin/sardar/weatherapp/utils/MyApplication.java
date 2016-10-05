@@ -1,7 +1,7 @@
 package com.guanyin.sardar.weatherapp.utils;
 
 import android.app.Application;
-import android.provider.Settings;
+import android.content.SharedPreferences;
 import android.util.Log;
 
 import com.baidu.location.BDLocation;
@@ -14,13 +14,14 @@ public class MyApplication extends Application {
 
     private static MyApplication instance;
 
-    public static long updateTime = System.currentTimeMillis();
 
     // 最近一次定位的经纬度
     public double latitude = 0;
     public double longitude = 0;
-    public String city = "";
+    public String city;
     public String address;
+
+    public SharedPreferences sharedPreferences;
 
     // 定位
     public LocationClient mLocationClient = null;
@@ -41,6 +42,22 @@ public class MyApplication extends Application {
     }
 
     private void init() {
+        sharedPreferences = getSharedPreferences("userinfo", MODE_PRIVATE);
+        long lasttime = sharedPreferences.getLong("lasttime", 0);
+        if (lasttime == 0) {
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putLong("lasttime", System.currentTimeMillis());
+            editor.apply();
+        }
+        // 将需要缓存的数据存起来
+        if (null == sharedPreferences.getString("defaultCity", " ")) {
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putString("defaultCity", "北京");
+            editor.putString("defaultAddress", "清华大学");
+            editor.putString("defaultTemperature", "25°");
+            editor.putString("defaultType", "阴");
+            editor.apply();
+        }
         // 开启百度地图
         mLocationClient = new LocationClient(getApplicationContext()); // 声明LocationClient类
         mLocationClient.registerLocationListener(myListener); // 注册监听函数

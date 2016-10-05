@@ -8,4 +8,12 @@
     <string name="defultcity">北京</string>
     <string name="tsing">清华大学</string>
     <string name="twohour">2小时前发布</string>
+    <string name="defult">晴</string>
+    <string name="_25">30°</string>
+    <string name="_14_22">14~22°</string>
+    <string name="defaultlisttype">阴转多云</string>
+    <string name="defaultlistday">周四</string>
+    <string name="realtime">实时</string>
+    <string name="hotpoint">热点</string>
+    <string name="share">分享</string>
 </resources>
