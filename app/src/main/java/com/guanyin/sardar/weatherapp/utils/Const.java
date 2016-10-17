@@ -10,6 +10,9 @@ public class Const {
 
     public static final boolean debug = true;
 
+    public static final int REQUEST_PHOTO_CAPTURE = 1;
+    public static final int REQUEST_IMAGE_CAPTURE = 2;
+
     public static final void showToast(Context context, String contents) {
         if (debug) {
             MyToast.makeshow(context, contents, Toast.LENGTH_SHORT);

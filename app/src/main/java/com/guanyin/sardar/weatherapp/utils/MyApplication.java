@@ -2,12 +2,15 @@ package com.guanyin.sardar.weatherapp.utils;
 
 import android.app.Application;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
 import android.util.Log;
 
 import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
 import com.baidu.location.LocationClient;
 import com.baidu.location.LocationClientOption;
+
+import java.util.ArrayList;
 
 
 public class MyApplication extends Application {
@@ -20,6 +23,8 @@ public class MyApplication extends Application {
     public double longitude = 0;
     public String city;
     public String address;
+
+    public ArrayList<Bitmap> bitmaps = new ArrayList<>();
 
     public SharedPreferences sharedPreferences;
 

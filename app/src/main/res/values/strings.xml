@@ -16,4 +16,8 @@
     <string name="realtime">实时</string>
     <string name="hotpoint">热点</string>
     <string name="share">分享</string>
+    <string name="multiday">多天预报</string>
+    <string name="trend">趋势</string>
+    <string name="list">列表</string>
+    <string name="theme">天气主题</string>
 </resources>

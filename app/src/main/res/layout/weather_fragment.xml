@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content"
-              android:background="@drawable/bg_haze"
-              android:orientation="vertical">
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_haze"
+                android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
         android:layout_marginTop="5dp">
 
         <ImageView
@@ -81,34 +83,105 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="300dp">
+        android:layout_marginTop="120dp">
 
         <TextView
             android:id="@+id/defaultTemp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="40dp"
+            android:layout_marginStart="20dp"
             android:text="@string/_25"
             android:textColor="@color/white"
             android:textSize="80sp"/>
 
         <TextView
             android:id="@+id/defaultType"
-            android:layout_marginStart="1dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="1dp"
             android:text="@string/defult"
             android:textColor="@color/white"
             android:textSize="20sp"/>
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="2dp"
+            android:layout_weight="1"/>
+
+        <ImageView
+            android:id="@+id/iv_update"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="bottom"
+            android:layout_margin="5dp"
+            android:contentDescription="@string/app_name"
+            android:src="@drawable/updating"/>
     </LinearLayout>
 
-    <ListView
-        android:id="@+id/multiForecast"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:listSelector="@android:color/transparent"
-        android:scrollbars="none">
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="vertical">
 
-    </ListView>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/unchecked">
 
-</LinearLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:text="@string/multiday"
+                android:textColor="@color/white"
+                android:textSize="16sp"/>
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="2dp"
+                android:layout_weight="1"/>
+
+            <RadioGroup
+                android:id="@+id/list_selector"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/trend"
+                    android:layout_width="40dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="2dp"
+                    android:background="@drawable/selector_background"
+                    android:button="@null"
+                    android:gravity="center"
+                    android:text="@string/trend"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"/>
+
+                <RadioButton
+                    android:id="@+id/list"
+                    android:layout_width="40dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="2dp"
+                    android:background="@drawable/selector_background"
+                    android:button="@null"
+                    android:gravity="center"
+                    android:text="@string/list"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"/>
+            </RadioGroup>
+        </LinearLayout>
+
+        <ListView
+            android:id="@+id/multiForecast"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:listSelector="@android:color/transparent"
+            android:scrollbars="none">
+
+        </ListView>
+    </LinearLayout>
+</RelativeLayout>

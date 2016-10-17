@@ -20,6 +20,8 @@
     <uses-permission android:name="android.permission.INTERNET"/>
     <!-- SD卡读取权限，用户写入离线定位数据 -->
     <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"/>
+    <!-- SD卡读取权限，用户写入离线定位数据 -->
+    <uses-permission android:name="android.permission.CAMERA"/>
 
     <application
         android:name=".utils.MyApplication"
@@ -38,9 +40,7 @@
             android:name="com.baidu.lbsapi.API_KEY"
             android:value="LffHEyjROkWn0H6d6VsWILWAkjNPmCXz"/>
 
-        <activity
-            android:name=".EntranceActivity"
-            >
+        <activity android:name=".EntranceActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
@@ -50,8 +50,11 @@
         <activity
             android:name=".WeatherActivity"
             android:label="@string/title_activity_weather"
-            android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
-            >
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
+        </activity>
+        <activity
+            android:name=".utils.WebActivity"
+            android:launchMode="singleInstance">
         </activity>
     </application>
 

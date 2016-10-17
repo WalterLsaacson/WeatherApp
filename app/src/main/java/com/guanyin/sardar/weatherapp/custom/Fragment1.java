@@ -11,9 +11,12 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.PopupWindow;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.guanyin.sardar.weatherapp.R;
@@ -32,7 +35,8 @@ import java.net.URL;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 
-public class Fragment1 extends Fragment implements View.OnClickListener {
+public class Fragment1 extends Fragment implements View.OnClickListener, CompoundButton
+        .OnCheckedChangeListener {
 
     private String TAG = "Fragment1";
     private MyApplication application;
@@ -48,14 +52,23 @@ public class Fragment1 extends Fragment implements View.OnClickListener {
     TextView defaultTemp;
     TextView defaultType;
     ListView multiForecast;
-    MyAdapter myAdapter;
+    MyListAdapter myAdapter;
+
+    PopupWindow shareWindow;
+    String shareString = "";
+
 
     String currentTemperature;
     String locationCity;
     String hint;
     String currentType;
 
+    RadioGroup listSelect;
+    RadioButton list;
+    RadioButton trend;
     ArrayList<DayInfo> dayInfo;
+
+    ImageView update;
 
     String[] info;
     private Handler handler = new Handler() {
@@ -73,6 +86,7 @@ public class Fragment1 extends Fragment implements View.OnClickListener {
             }
         }
     };
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle
@@ -92,10 +106,18 @@ public class Fragment1 extends Fragment implements View.OnClickListener {
             application = MyApplication.getInstance();
         }
         // 获取天气信息
-        sendRequestWithHttpClient();
+//        sendRequestWithHttpClient();
     }
 
     private void initView(View view) {
+
+        listSelect = (RadioGroup) view.findViewById(R.id.list_selector);
+        listSelect.check(R.id.list);
+        list = (RadioButton) view.findViewById(R.id.list);
+        list.setOnCheckedChangeListener(this);
+        trend = (RadioButton) view.findViewById(R.id.trend);
+        trend.setOnCheckedChangeListener(this);
+
         addCity_iv = (ImageView) view
                 .findViewById(R.id.add_city);
         addCity_iv.setOnClickListener(this);
@@ -121,6 +143,8 @@ public class Fragment1 extends Fragment implements View.OnClickListener {
         multiForecast = (ListView) view.findViewById(R.id.multiForecast);
         multiForecast.setAdapter(myAdapter);
 
+        update = (ImageView) view.findViewById(R.id.iv_update);
+        update.setOnClickListener(this);
 
         long lastTime = application.sharedPreferences.getLong("lasttime", 0);
         long currentTime = System.currentTimeMillis();
@@ -164,7 +188,7 @@ public class Fragment1 extends Fragment implements View.OnClickListener {
 
             dayInfo.add(tempDay);
         }
-        myAdapter = new MyAdapter(getActivity(), dayInfo);
+        myAdapter = new MyListAdapter(getActivity(), dayInfo);
     }
 
 
@@ -278,20 +302,19 @@ public class Fragment1 extends Fragment implements View.OnClickListener {
                     day.fengxiang);
         }
         currentType = dayInfo.get(0).type;
-        multiForecast.deferNotifyDataSetChanged();
+        myAdapter.notifyDataSetChanged();
     }
 
     //分享文字
     private void shareWeatherInfo() {
         // 弹出pop window
-        final PopupWindow shareWindow;
         final View popWindow_view = getActivity().getLayoutInflater().inflate(R.layout
                 .popwindows, null);
         shareWindow = new PopupWindow(popWindow_view, ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.MATCH_PARENT, true);
         shareWindow.showAtLocation(getView(), Gravity.CENTER, 0, 0);
 
-        // 设置pop window各个空间的监听事件
+        // 设置pop window各个控件的监听事件
         popWindow_view.findViewById(R.id.empty).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -305,22 +328,22 @@ public class Fragment1 extends Fragment implements View.OnClickListener {
         popWindow_view.findViewById(R.id.share_sms).setOnClickListener(this);
         popWindow_view.findViewById(R.id.share_more).setOnClickListener(this);
 
-        shareWindow.dismiss();
-
     }
 
     @Override
     public void onClick(View v) {
-        String shareString = "";
         switch (v.getId()) {
             case R.id.add_city:
                 break;
+            case R.id.iv_update:
+                sendRequestWithHttpClient();
+                break;
             case R.id.share_iv:
                 // TODO: 2016/9/28 这里接入各种sdk实现分享的功能
-                if (null == dayInfo.get(0)) {
+                if (null == currentTemperature) {
                     Const.showToast(context, "请先刷新天气状况哦~~~");
                 } else {
-                    shareString = "今天" + dayInfo.get(0).date + "," + locationCity + dayInfo
+                    shareString += "今天" + dayInfo.get(0).date + "," + locationCity + dayInfo
                             .get(0).type + ",最"
                             + dayInfo.get(0).low + ",最" + dayInfo.get(0).high + ",当前温度：" +
                             currentTemperature + "℃";
@@ -328,6 +351,7 @@ public class Fragment1 extends Fragment implements View.OnClickListener {
                 }
                 break;
             case R.id.share_more:
+                Const.log(TAG, shareString);
                 Intent shareIntent = new Intent();
                 shareIntent.setAction(Intent.ACTION_SEND);
                 shareIntent.putExtra(Intent.EXTRA_TEXT, shareString);
@@ -335,7 +359,22 @@ public class Fragment1 extends Fragment implements View.OnClickListener {
 
                 //设置分享列表的标题，并且每次都显示分享列表
                 startActivity(Intent.createChooser(shareIntent, "分享到"));
+                shareWindow.dismiss();
                 break;
         }
     }
+
+
+    @Override
+    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+        if (isChecked) {
+            sendRequestWithHttpClient();
+            multiForecast.setVisibility(View.VISIBLE);
+        } else {
+            multiForecast.setVisibility(View.INVISIBLE);
+        }
+    }
+
+    // http://www.jianshu.com/p/c31af6133cf9?utm_campaign=haruki&utm_content=note&utm_medium
+    // =reader_share&utm_source=qq
 }

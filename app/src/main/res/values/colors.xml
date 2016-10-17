@@ -14,5 +14,5 @@
     <color name="pay">#01AAEE</color>
     <color name="maptop">#394048</color>
     <color name="checked">#131313</color>
-    <color name="unchecked">#01AAEE</color>
+    <color name="unchecked">#BBBBBB</color>
 </resources>

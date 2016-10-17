@@ -1,6 +1,7 @@
 package com.guanyin.sardar.weatherapp;
 
 import android.content.Intent;
+import android.os.PersistableBundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -43,5 +44,10 @@ public class EntranceActivity extends AppCompatActivity {
         };
         timer.schedule(timerTask, 2000);
 
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState, PersistableBundle outPersistentState) {
+        super.onSaveInstanceState(outState, outPersistentState);
     }
 }

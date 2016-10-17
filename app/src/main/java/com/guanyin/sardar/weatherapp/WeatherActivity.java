@@ -1,6 +1,7 @@
 package com.guanyin.sardar.weatherapp;
 
 import android.app.Activity;
+import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Context;
@@ -16,7 +17,6 @@ import com.guanyin.sardar.weatherapp.custom.Fragment2;
 import com.guanyin.sardar.weatherapp.custom.Fragment3;
 import com.guanyin.sardar.weatherapp.custom.Fragment4;
 import com.guanyin.sardar.weatherapp.utils.Const;
-import com.guanyin.sardar.weatherapp.utils.MyApplication;
 
 public class WeatherActivity extends Activity implements CompoundButton.OnCheckedChangeListener {
 
@@ -39,24 +39,22 @@ public class WeatherActivity extends Activity implements CompoundButton.OnChecke
     private Fragment3 aroundFragment;
     private Fragment4 meFragment;
 
+    // 设置一个fragment方便切换各个fragment
+    Fragment defaultFragment;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_weather);
+
+        initData();
+
+        initView();
+
         setContentFrame();
-        setRadioGroup();
     }
 
-    private void setContentFrame() {
-        FragmentManager fm = getFragmentManager();
-        FragmentTransaction transaction = fm.beginTransaction();
-        weatherFragment = new Fragment1();
-        transaction.replace(R.id.content_frame, weatherFragment);
-        transaction.commit();
-    }
-
-    private void setRadioGroup() {
-
+    private void initView() {
         menu = (RadioGroup) findViewById(R.id.bottom_menu);
         weather = (RadioButton) findViewById(R.id.weather);
         live = (RadioButton) findViewById(R.id.live);
@@ -90,13 +88,75 @@ public class WeatherActivity extends Activity implements CompoundButton.OnChecke
 
         menu.check(R.id.weather);// 默认勾选首页，初始化时候让首页默认勾选
 
+        defaultFragment = weatherFragment;
         // 设置切换fragment
         weather.setOnCheckedChangeListener(this);
         live.setOnCheckedChangeListener(this);
         around.setOnCheckedChangeListener(this);
         me.setOnCheckedChangeListener(this);
+
+
     }
 
+    private void initData() {
+    }
+
+    private void setContentFrame() {
+        FragmentManager fm = getFragmentManager();
+        FragmentTransaction transaction = fm.beginTransaction();
+        weatherFragment = new Fragment1();
+        transaction.replace(R.id.content_frame, weatherFragment);
+        transaction.commit();
+    }
+
+
+    // radioGroup进行选择之后切换fragment
+    @Override
+    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+
+        FragmentManager fm = getFragmentManager();
+        FragmentTransaction transaction = fm.beginTransaction();
+        if (isChecked) {
+            switch (buttonView.getId()) {
+                case R.id.weather:
+                    if (null == weatherFragment) {
+                        weatherFragment = new Fragment1();
+                        transaction.replace(R.id.content_frame, weatherFragment);
+                    } else
+                        transaction.replace(R.id.content_frame, weatherFragment);
+                    transaction.addToBackStack(null);
+                    break;
+                case R.id.live:
+                    if (null == liveFragment) {
+                        liveFragment = new Fragment2();
+                        transaction.replace(R.id.content_frame, liveFragment);
+                    } else
+                        transaction.replace(R.id.content_frame, liveFragment);
+                    transaction.addToBackStack(null);
+
+                    break;
+                case R.id.around:
+                    if (null == aroundFragment) {
+                        aroundFragment = new Fragment3();
+                        transaction.replace(R.id.content_frame, aroundFragment);
+                    } else
+                        transaction.replace(R.id.content_frame, aroundFragment);
+                    transaction.addToBackStack(null);
+
+                    break;
+                case R.id.me:
+                    if (null == meFragment) {
+                        meFragment = new Fragment4();
+                        transaction.replace(R.id.content_frame, meFragment);
+                    } else
+                        transaction.replace(R.id.content_frame, meFragment);
+                    transaction.addToBackStack(null);
+
+                    break;
+            }
+            transaction.commit();
+        }
+    }
 
     // 重写返回键按钮，实现在两秒内按两次返回键实现退出程序
     @Override
@@ -115,43 +175,5 @@ public class WeatherActivity extends Activity implements CompoundButton.OnChecke
         return super.onKeyDown(keyCode, event);
     }
 
-    @Override
-    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 
-        FragmentManager fm = getFragmentManager();
-        FragmentTransaction transaction = fm.beginTransaction();
-        if (isChecked) {
-            switch (buttonView.getId()) {
-                case R.id.weather:
-                    if (null == weatherFragment) {
-                        weatherFragment = new Fragment1();
-                        transaction.replace(R.id.content_frame, weatherFragment);
-                    } else
-                        transaction.replace(R.id.content_frame, weatherFragment);
-                    break;
-                case R.id.live:
-                    if (null == liveFragment) {
-                        liveFragment = new Fragment2();
-                        transaction.replace(R.id.content_frame, liveFragment);
-                    } else
-                        transaction.replace(R.id.content_frame, liveFragment);
-                    break;
-                case R.id.around:
-                    if (null == aroundFragment) {
-                        aroundFragment = new Fragment3();
-                        transaction.replace(R.id.content_frame, aroundFragment);
-                    } else
-                        transaction.replace(R.id.content_frame, aroundFragment);
-                    break;
-                case R.id.me:
-                    if (null == meFragment) {
-                        meFragment = new Fragment4();
-                        transaction.replace(R.id.content_frame, meFragment);
-                    } else
-                        transaction.replace(R.id.content_frame, meFragment);
-                    break;
-            }
-            transaction.commit();
-        }
-    }
 }

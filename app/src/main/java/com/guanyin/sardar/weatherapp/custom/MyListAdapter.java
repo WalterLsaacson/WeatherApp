@@ -12,12 +12,12 @@ import com.guanyin.sardar.weatherapp.R;
 
 import java.util.ArrayList;
 
-public class MyAdapter extends BaseAdapter {
+public class MyListAdapter extends BaseAdapter {
 
     Context context;
     ArrayList<DayInfo> dayInfo;
 
-    public MyAdapter(Context context, ArrayList dayInfo) {
+    public MyListAdapter(Context context, ArrayList dayInfo) {
         this.context = context;
         this.dayInfo = dayInfo;
     }
